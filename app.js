@@ -37,16 +37,16 @@ const showData = (books) => {
 
       newArr.forEach((book) => {
         const newDiv = document.createElement("div");
-        // newDiv.classList.add("col-4 card my-3");
+        newDiv.classList.add("col-4");
         newDiv.innerHTML = `
         <div class="col-4 card my-3" style="width: 18rem; height: auto">
         <img class="card-img-top img-fluid" style="width: auto; height: 250px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" alt="">
 
-        <div class="card-body" >
-          <h5 class="card-title text-primary">${book.title}</h5>
-          <p class="card-subtitle text-success mb-2" >${book.author_name[0]}</p>
-          <p class="card-subtitle text-success mb-2" >${book.publisher[0]}</p>
-          <p class="card-subtitle text-success mb-2" >${book.first_publish_year}</p>
+        <div class="card-body" style="height: 200px; overflow: hidden" >
+          <h4 class="card-title fw-bold text-primary">${book.title}</h4>
+          <p class="card-subtitle text fs-5 text-info mb-2" >${book.author_name[0]}</p>
+          <p class="card-subtitle text fs-6 fw-lighter text-secondary" >${book.publisher[0]}</p>
+          <p class="card-subtitle text fs-6 fw-lighter text-secondary mb-2" >First Publish:${book.first_publish_year}</p>
         </div>
     </div>`;
 
