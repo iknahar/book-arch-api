@@ -24,10 +24,10 @@ document.getElementById("search-btn").addEventListener("click", () => {
 const showData = (books) => {
   const allResult = books.docs.filter(
     (book) =>
-      book.cover_i !== undefined &&
       book.author_name !== undefined &&
       book.publisher !== undefined &&
-      book.title !== undefined);
+      book.title !== undefined
+  );
   if (allResult.length === 0) {
     foundBookNumber.innerHTML = "No Result Found";
     bookDetails.innerHTML = "";
@@ -39,14 +39,18 @@ const showData = (books) => {
     bookContainer.innerHTML = "";
 
     allResult.forEach((book) => {
+      let imageSource = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+      if (book.cover_i === undefined) {
+        imageSource = `images/default.jpg`;
+      }
       const newDiv = document.createElement("div");
       newDiv.classList.add("col-4");
       newDiv.innerHTML = `
         <div class="col-4 card my-3" style="width: 18rem; height: auto">
-        <img class="card-img-top img-fluid" style="width: auto; height: 250px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" alt="">
+        <img class="card-img-top img-fluid" style="width: auto; height: 250px" src="${imageSource}" alt="">
 
         <div class="card-body" style="height: 180px; overflow: hidden" >
-          <h4 class="card-title fw-bold text-primary">${book.title}</h4>
+          <h4 class="card-title fw-bold text-primary text-truncate">${book.title}</h4>
           <p class="card-subtitle text fs-5 text-info mb-2" >${book.author_name[0]}</p>
           <p class="card-subtitle text fs-6 fw-lighter text-secondary" >${book.publisher[0]}</p>
           <p class="card-subtitle text fs-6 fw-lighter text-secondary mb-2" >First Publish: ${book.first_publish_year}</p>
