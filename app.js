@@ -27,9 +27,7 @@ const showData = (books) => {
       book.cover_i !== undefined &&
       book.author_name !== undefined &&
       book.publisher !== undefined &&
-      book.title !== undefined &&
-      book.first_publish_year !== undefined
-  );
+      book.title !== undefined);
   if (allResult.length === 0) {
     foundBookNumber.innerHTML = "No Result Found";
     bookDetails.innerHTML = "";
@@ -51,7 +49,7 @@ const showData = (books) => {
           <h4 class="card-title fw-bold text-primary">${book.title}</h4>
           <p class="card-subtitle text fs-5 text-info mb-2" >${book.author_name[0]}</p>
           <p class="card-subtitle text fs-6 fw-lighter text-secondary" >${book.publisher[0]}</p>
-          <p class="card-subtitle text fs-6 fw-lighter text-secondary mb-2" >First Publish:${book.first_publish_year}</p>
+          <p class="card-subtitle text fs-6 fw-lighter text-secondary mb-2" >First Publish: ${book.first_publish_year}</p>
         </div>
     </div>`;
 
