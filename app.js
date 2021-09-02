@@ -8,7 +8,7 @@ document.getElementById("search-btn").addEventListener("click", () => {
       </div>
     </div>`;
   const searchText = document.getElementById("search-text");
-  const api = `http://openlibrary.org/search.json?q=${searchText.value}`;
+  const api = `https://openlibrary.org/search.json?q=${searchText.value}`;
   searchText.value = "";
   fetch(api)
     .then((res) => res.json())
@@ -27,7 +27,6 @@ const showData = (books) => {
   {
     if (allResult.length === 0) {
       bookDetails.innerHTML = "";
-      countResultFound.innerHTML = "";
       bookContainer.innerHTML = "No Result Found";
     } else {
       let countResultFound = document.createElement("p");
