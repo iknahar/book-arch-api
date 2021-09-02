@@ -16,12 +16,13 @@ document.getElementById("search-btn").addEventListener("click", () => {
   // =====================Fetch API =============
   fetch(api)
     .then((res) => res.json())
-    .then((data) => showData(data.docs));
+    .then((data) => showData(data));
 });
 
-// =====================SHowing book details adding some conditions =============
+// =====================SHowing book details adding =============
+
 const showData = (books) => {
-  let allResult = books.filter(
+  const allResult = books.docs.filter(
     (book) =>
       book.cover_i !== undefined &&
       book.author_name !== undefined &&
@@ -29,24 +30,21 @@ const showData = (books) => {
       book.title !== undefined &&
       book.first_publish_year !== undefined
   );
-  {
-    // =====================No result found =============
-    if (allResult.length === 0) {
-      foundBookNumber.innerHTML = "No Result Found";
-      bookDetails.innerHTML = "";
-      bookContainer.innerHTML = "";
-    }
-    // =====================Valid Search Results =============
-    else {
-      foundBookNumber.innerText = `${allResult.length} books found`;
-      bookContainer.innerHTML = "";
+  if (allResult.length === 0) {
+    foundBookNumber.innerHTML = "No Result Found";
+    bookDetails.innerHTML = "";
+    bookContainer.innerHTML = "";
+  } else {
+    const totalResult = books.numFound;
+    foundBookNumber.innerText = `Total Search Result ${totalResult}. And books showing ${allResult.length}`;
 
-      // =====================Style & create book card for each book =============
-      allResult.forEach((book) => {
-        const newDiv = document.createElement("div");
-        newDiv.classList.add("col-4");
-        newDiv.innerHTML = `
-    <div class="col-4 card my-3" style="width: 18rem; height: auto">
+    bookContainer.innerHTML = "";
+
+    allResult.forEach((book) => {
+      const newDiv = document.createElement("div");
+      newDiv.classList.add("col-4");
+      newDiv.innerHTML = `
+        <div class="col-4 card my-3" style="width: 18rem; height: auto">
         <img class="card-img-top img-fluid" style="width: auto; height: 250px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" alt="">
 
         <div class="card-body" style="height: 180px; overflow: hidden" >
@@ -57,8 +55,7 @@ const showData = (books) => {
         </div>
     </div>`;
 
-        bookContainer.appendChild(newDiv);
-      });
-    }
+      bookContainer.appendChild(newDiv);
+    });
   }
 };
