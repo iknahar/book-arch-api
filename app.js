@@ -1,4 +1,5 @@
 const bookContainer = document.getElementById("book-container");
+const foundBookNumber = document.getElementById("found-book-number");
 
 let bookDetails = document.getElementById("book-details");
 document.getElementById("search-btn").addEventListener("click", () => {
@@ -10,6 +11,7 @@ document.getElementById("search-btn").addEventListener("click", () => {
   const searchText = document.getElementById("search-text");
   const api = `https://openlibrary.org/search.json?q=${searchText.value}`;
   searchText.value = "";
+  foundBookNumber.innerText = "";
   fetch(api)
     .then((res) => res.json())
     .then((data) => showData(data.docs));
@@ -26,13 +28,12 @@ const showData = (books) => {
   );
   {
     if (allResult.length === 0) {
+      foundBookNumber.innerHTML = "No Result Found";
       bookDetails.innerHTML = "";
-      bookContainer.innerHTML = "No Result Found";
+      bookContainer.innerHTML = "";
     } else {
-      let countResultFound = document.createElement("p");
-      countResultFound.innerHTML = `${allResult.length} books found`;
-      bookDetails.innerHTML = "";
-      bookDetails.appendChild(countResultFound);
+      //   bookDetails.innerHTML = "";
+      foundBookNumber.innerText = `${allResult.length} books found`;
       bookContainer.innerHTML = "";
 
       allResult.forEach((book) => {
