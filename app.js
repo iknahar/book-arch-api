@@ -27,6 +27,7 @@ const showData = (books) => {
   {
     if (allResult.length === 0) {
       bookDetails.innerHTML = "";
+      countResultFound.innerHTML = "";
       bookContainer.innerHTML = "No Result Found";
     } else {
       let countResultFound = document.createElement("p");
