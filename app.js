@@ -16,33 +16,33 @@ document.getElementById("search-btn").addEventListener("click", () => {
 });
 
 const showData = (books) => {
-  var newArr = books.filter(
-    (one) =>
-      one.cover_i !== undefined &&
-      one.author_name !== undefined &&
-      one.publisher !== undefined &&
-      one.title !== undefined &&
-      one.first_publish_year !== undefined
+  let allResult = books.filter(
+    (book) =>
+      book.cover_i !== undefined &&
+      book.author_name !== undefined &&
+      book.publisher !== undefined &&
+      book.title !== undefined &&
+      book.first_publish_year !== undefined
   );
   {
-    if (newArr.length === 0) {
+    if (allResult.length === 0) {
       bookDetails.innerHTML = "";
       bookContainer.innerHTML = "No Result Found";
     } else {
-      var newP = document.createElement("p");
-      newP.innerHTML = `${newArr.length} books found`;
+      let countResultFound = document.createElement("p");
+      countResultFound.innerHTML = `${allResult.length} books found`;
       bookDetails.innerHTML = "";
-      bookDetails.appendChild(newP);
+      bookDetails.appendChild(countResultFound);
       bookContainer.innerHTML = "";
 
-      newArr.forEach((book) => {
+      allResult.forEach((book) => {
         const newDiv = document.createElement("div");
         newDiv.classList.add("col-4");
         newDiv.innerHTML = `
         <div class="col-4 card my-3" style="width: 18rem; height: auto">
         <img class="card-img-top img-fluid" style="width: auto; height: 250px" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" alt="">
 
-        <div class="card-body" style="height: 200px; overflow: hidden" >
+        <div class="card-body" style="height: 180px; overflow: hidden" >
           <h4 class="card-title fw-bold text-primary">${book.title}</h4>
           <p class="card-subtitle text fs-5 text-info mb-2" >${book.author_name[0]}</p>
           <p class="card-subtitle text fs-6 fw-lighter text-secondary" >${book.publisher[0]}</p>
